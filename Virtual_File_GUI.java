@@ -1,7 +1,6 @@
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Vector;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
 
@@ -11,7 +10,7 @@ public class Virtual_File_GUI extends JFrame
     
     public Virtual_File_GUI()
     {
-
+        vf = new Virtual_File();
     }
 
     public void ErrorMssg(String message)
@@ -69,16 +68,15 @@ public class Virtual_File_GUI extends JFrame
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
-
     }
 
     public void VFGUI()
     {
         //Window Creation
-
         JFrame window = new JFrame("Virtual File System GUI");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(700,700);
+        window.setSize(1300,700);
+
         //Panel Creation
         JPanel NewFile = new JPanel();
         JLabel Newf = new JLabel("File Name: ");
@@ -102,10 +100,10 @@ public class Virtual_File_GUI extends JFrame
         });
 
         NewFile.add(addFile);
-        NewFile.add(ProcessField);
         NewFile.add(Newf);
+        NewFile.add(ProcessField);
         NewFile.add(Creator);
-        
+
         JPanel panelDeleteFile = new JPanel();
         JTextField DFField = new JTextField(30);
         JLabel DFLable = new JLabel("File to delete: ");

@@ -21,12 +21,12 @@ public class Virtual_File
 
     }
     //Search in the directories and delete file of exact name and extension
-    void deleteFile(String fName, String fExtension)
+    void deleteFile(String fName)
     {
 
     }
     //Search in the directories and find file of exact name
-    void printFile(String fName, String fext)
+    void printFile(String fName)
     {
         System.out.println();
     }
