@@ -1,22 +1,32 @@
+import java.util.Vector;
+
 public class Virtual_File
 {
-    public Virtual_File()
-    {
-
-    }
-
-    public void addFile()
-    {
-
-    }
-
-    public void deleteFile()
-    {
-
-    }
+    Vector<Directory> drives;
+    String vfName;
     
-    public void printFile()
+    /**
+     * Default Constructor 
+     */
+    Virtual_File()
+    {
+        drives.add(new Directory("Drive A"));
+        drives.add(new Directory("Drive B"));
+        drives.add(new Directory("Drive C"));
+    }
+    //ALL OF THESE FUNCTIONS HAVE TO LOOK WITHIN THE DIRECTORIES TO ADD, DELETE, OR PRINT
+    void addFile()
+    {
+        
+    }
+
+    void deleteFile()
     {
 
+    }
+
+    void printFile()
+    {
+        System.out.println();
     }
 }
