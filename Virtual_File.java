@@ -12,41 +12,46 @@ public class Virtual_File
     Virtual_File()
     {
         drives.add(new Directory("Drive A"));
+        
         drives.add(new Directory("Drive B"));
+        
         drives.add(new Directory("Drive C"));
+       
+        drives.get(0).addDirectory(new Directory("Directory 1"));
+        drives.get(0).addDirectory(new Directory("Directory 2"));
+
+        drives.get(1).addDirectory(new Directory("Directory 3"));
+        
+        drives.get(2).addDirectory(new Directory("Directory 4"));
     }
     //ALL OF THESE FUNCTIONS HAVE TO LOOK WITHIN THE DIRECTORIES TO ADD, DELETE, OR PRINT
-    //Find the exact directory and add a file in that directory
-    void addFile(String dirname, String fName)
+    //Find a directory and add a file in that directory
+    void addFile(String fName)
     {
-        if(dirname == "")
-        {
-            Random rand = new Random();
-            int x = rand.nextInt(3);
-            switch(x)
-            {
-                case 1:
-                    //Add the file to drive A
-                    drives.get(1).addFile(new File(fName));
-                case 2:
-                    //Add the file to drive B
-                    drives.get(2).addFile(new File(fName));
-                case 3:
-                    //Add the file to drive C
-                    drives.get(3).addFile(new File(fName));
-            }
-
-        }
         for(int i = 0; i < drives.size(); i++)
         {
-            Directory temp = new Directory(dirname);
-            //This if it's a level one directory
-            if(drives.elementAt(i).getDirectoryName(dirname).equals(temp))
+            //If it has no file at all
+            if(drives.elementAt(i).fileSize() == 0)
             {
                 drives.elementAt(i).addFile(new File(fName));
             }
-        }
+            else
+            {
+                Random rand = new Random();
+                int x = rand.nextInt(3);
+                switch (x)
+                {
+                    case 1:
+                        for(int k = 0; k < drives.size(); k++){
+                            if()
+                        }
+                    case 2:
+                    case 3:
+                }
+            }
+        }   
     }
+
     //Search in the directories and delete file of exact name and extension
     void deleteFile(String fName)
     {
@@ -58,12 +63,13 @@ public class Virtual_File
             }
         }
     }
+
     //Search in the directories and find file of exact name
     void printFile(String fName)
     {
         for(int i = 0; i < drives.size(); i++)
         {
-            if()
+            if(drives.elementAt(i).getFileName(fName).equals(fName))
             {
                 System.out.println();
             }
