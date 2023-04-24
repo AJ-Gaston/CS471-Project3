@@ -62,4 +62,9 @@ public class Directory
         }
         return null;
     }
+
+    void addFile(File f)
+    {
+        files.add(f);
+    }
 }
