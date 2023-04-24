@@ -30,7 +30,8 @@ public class Directory
      * Finds the directory's name
      * @return the name of the directory
      */
-    String getName(){
+    String getName()
+    {
         return directoryName;
     }
 
@@ -63,6 +64,28 @@ public class Directory
         return null;
     }
 
+    File getFileName(String name)
+    {
+
+        if(directories.size() == 0 || files.size() == 0)
+        {
+            return null;
+        }
+        //Look at the files
+        for(int i = 0; i < files.size(); i++)
+        {
+            if(files.elementAt(i).getFileName().equals(name))
+            {
+                return files.elementAt(i);
+            }
+        }
+        //Look in the lower level directory
+        for(int i = 0; i < directories.size(); i++)
+        {
+            if(directories.)
+        }
+        return null;
+    }
     void addFile(File f)
     {
         files.add(f);

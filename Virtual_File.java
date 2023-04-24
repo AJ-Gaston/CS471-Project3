@@ -41,30 +41,31 @@ public class Virtual_File
         {
             Directory temp = new Directory(dirname);
             //This if it's a level one directory
-            if(drives.get(i).getDirectoryName(dirname).equals(temp))
+            if(drives.elementAt(i).getDirectoryName(dirname).equals(temp))
             {
-                drives.
-            }
-            //This is for the level 2 directory
-            else
-            {
-
+                drives.elementAt(i).addFile(new File(fName));
             }
         }
     }
     //Search in the directories and delete file of exact name and extension
     void deleteFile(String fName)
     {
-
+        for(int i = 0; i < drives.size(); i++)
+        {
+            if(drives.elementAt(i).getFileName(fName).equals(fName))
+            {
+                
+            }
+        }
     }
     //Search in the directories and find file of exact name
     void printFile(String fName)
     {
         for(int i = 0; i < drives.size(); i++)
         {
-            if(drives.contains(fName))
+            if()
             {
-                drives.elementAt(i).printFileContents();
+                System.out.println();
             }
         }
     }
