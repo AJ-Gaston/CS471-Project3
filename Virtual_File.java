@@ -37,12 +37,16 @@ public class Virtual_File
     }
 
     //Search in the directories and delete file of exact name and extension
-    void deleteFile(String fName)
+    boolean deleteFile(String fName)
     {
+        boolean deleted = false;
         for(int i = 0; i < drives.size(); i++)
         {
             drives.elementAt(i).deleteFileInDirectory(fName);
+            deleted = true;
+
         }
+        return deleted;
     }
 
     //Search in the directories and find file of exact name, then print them

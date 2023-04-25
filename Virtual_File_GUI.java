@@ -13,6 +13,18 @@ public class Virtual_File_GUI extends JFrame
         vf = new Virtual_File();
     }
 
+    public boolean hasText(String word)
+    {
+        for(int i=0; i < word.length();i++)
+        {
+            if(word.charAt(i) != ' ')
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void ErrorMssg(String message)
     {
         JDialog addDialog = new JDialog();
@@ -78,16 +90,20 @@ public class Virtual_File_GUI extends JFrame
         window.setSize(1300,700);
 
         //Panel Creation
-        JPanel NewFile = new JPanel();
+        final JDialog addDialog = new JDialog();
+
+        JPanel NewFile = new JPanel(new BorderLayout());
+        NewFile.setPreferredSize(new Dimension(175, 100));
         JLabel Newf = new JLabel("File Name: ");
-        JTextField ProcessField = new JTextField(30);
+        JTextField FileField = new JTextField(30);
         JButton addFile = new JButton("Add File");
         addFile.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
+                String NewFileName = FileField.getText();
+                FileField.setText("");
             }
         });
         
@@ -101,9 +117,27 @@ public class Virtual_File_GUI extends JFrame
 
         NewFile.add(addFile);
         NewFile.add(Newf);
-        NewFile.add(ProcessField);
+        NewFile.add(FileField);
         NewFile.add(Creator);
+        JLabel title = new JLabel(" Add File ");
+        addDialog.setTitle("Add File Process");
 
+        addDialog.add(NewFile);
+
+        addDialog.setResizable(false);
+
+        addDialog.pack();
+
+        addDialog.setLocationRelativeTo(null);
+
+        addDialog.setModal(true);
+
+        addDialog.setAlwaysOnTop(true);
+
+        addDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+
+        addDialog.setVisible(true);
+        
         JPanel panelDeleteFile = new JPanel();
         JTextField DFField = new JTextField(30);
         JLabel DFLable = new JLabel("File to delete: ");
@@ -113,6 +147,12 @@ public class Virtual_File_GUI extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                String df = DFField.getText();
+                DFField.setText("");
+                if(!vf.deleteFile(df))
+                {
+                    ErrorMssg("Unable to find and delete file!");
+                }
 
             }
         });
