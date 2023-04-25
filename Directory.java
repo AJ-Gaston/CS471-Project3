@@ -36,9 +36,9 @@ public class Directory
     }
 
     /**
-     * This finds gthe directory's name as well as any inside the directory
+     * This finds the directory's name as well as any inside the directory
      * @param name
-     * @return directory's name
+     * @return directory
      */
     Directory getDirectoryName(String name)
     {
@@ -63,17 +63,30 @@ public class Directory
         }
         return null;
     }
+
+    Vector<String> getChildren()
+    {
+        Vector<String> temp = new Vector<String>();
+        //This looks at the directories within the current directory
+        for(int i = 0; i < directories.size(); i++)
+        {
+            temp.add(directories.elementAt(i).getName());
+        }
+        //Looks into the files within directory
+        for(int i = 0; i < files.size(); i++)
+        {
+            temp.add(files.elementAt(i).getFileName());
+        }
+        return temp;
+    }
+
     /**
      * Gets the name of a file within the directory
      * @param name
      * @return the file the matches the name
      */
-    File getFileName(String name)
+    File getFileNameInDirectory(String name)
     {
-        if(directories.size() == 0 || files.size() == 0)
-        {
-            return null;
-        }
         //Look at the files in the tope drive/directory
         for(int i = 0; i < files.size(); i++)
         {
@@ -85,8 +98,8 @@ public class Directory
         //Look in the lower level directory (so the directory under A,B,C)
         for(int i = 0; i < directories.size(); i++)
         {
-            if(directories.elementAt(i).getFileName(name).equals(name)){
-                File temp = directories.elementAt(i).getFileName(name);
+            File temp = directories.elementAt(i).getFileNameInDirectory(name);
+            if(temp.getFileName().equals(name)){
                 return temp;
             }
         }
@@ -106,4 +119,20 @@ public class Directory
     {
         files.add(f);
     }
+
+    //Make it more specific 
+    void deleteFileInDirectory(String fName){
+        for(int k = 0; k < files.size(); k++)
+        {
+            if(fName.equals(files.elementAt(k).getFileName()))
+            {
+                files.removeElementAt(k);
+            }
+        }
+        for(int j = 0; j < directories.size(); j++)
+        {
+            directories.elementAt(j).deleteFileInDirectory(fName);
+        }
+    }
+    
 }

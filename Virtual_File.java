@@ -17,39 +17,23 @@ public class Virtual_File
         
         drives.add(new Directory("Drive C"));
        
-        drives.get(0).addDirectory(new Directory("Directory 1"));
-        drives.get(0).addDirectory(new Directory("Directory 2"));
+        drives.get(0).addDirectory(new Directory("Directory 1A"));
+        drives.get(0).addDirectory(new Directory("Directory 2A"));
 
-        drives.get(1).addDirectory(new Directory("Directory 3"));
-        
-        drives.get(2).addDirectory(new Directory("Directory 4"));
+        drives.get(1).addDirectory(new Directory("Directory 3B"));
+
+        drives.get(2).addDirectory(new Directory("Directory 4C"));
     }
     //ALL OF THESE FUNCTIONS HAVE TO LOOK WITHIN THE DIRECTORIES TO ADD, DELETE, OR PRINT
     //Find a directory and add a file in that directory
-    void addFile(String fName)
-    {
-        for(int i = 0; i < drives.size(); i++)
+    void addFile(String dirName, String fName, String textString)
+    {   
+        Directory temporary = findDirectory(dirName);
+        if(temporary != null)
         {
-            //If it has no file at all
-            if(drives.elementAt(i).fileSize() == 0)
-            {
-                drives.elementAt(i).addFile(new File(fName));
-            }
-            else
-            {
-                Random rand = new Random();
-                int x = rand.nextInt(3);
-                switch (x)
-                {
-                    case 1:
-                        for(int k = 0; k < drives.size(); k++){
-                            if()
-                        }
-                    case 2:
-                    case 3:
-                }
-            }
-        }   
+            temporary.addFile(new File(fName, textString));
+        }
+
     }
 
     //Search in the directories and delete file of exact name and extension
@@ -57,22 +41,36 @@ public class Virtual_File
     {
         for(int i = 0; i < drives.size(); i++)
         {
-            if(drives.elementAt(i).getFileName(fName).equals(fName))
-            {
-                
-            }
+            drives.elementAt(i).deleteFileInDirectory(fName);
         }
     }
 
-    //Search in the directories and find file of exact name
-    void printFile(String fName)
+    //Search in the directories and find file of exact name, then print them
+    String printFile(String fName)
     {
         for(int i = 0; i < drives.size(); i++)
         {
-            if(drives.elementAt(i).getFileName(fName).equals(fName))
+            File temp = drives.elementAt(i).getFileNameInDirectory(fName);
+            //This is for the null string
+            if()
             {
-                System.out.println();
+
             }
         }
+        
+    }
+
+    Directory findDirectory(String name)
+    {
+        Directory temp = null;
+        for(int i = 0; i < drives.size(); i++)
+        {
+            temp = drives.elementAt(i).getDirectoryName(name);
+            if(temp != null)
+            {
+                return temp;
+            }
+        }
+        return null;
     }
 }
