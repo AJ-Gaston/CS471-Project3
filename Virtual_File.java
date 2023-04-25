@@ -52,12 +52,12 @@ public class Virtual_File
         {
             File temp = drives.elementAt(i).getFileNameInDirectory(fName);
             //This is for the null string
-            if()
+            if(temp != null)
             {
-
+                return temp.getFileContent();
             }
         }
-        
+        return null;
     }
 
     Directory findDirectory(String name)
