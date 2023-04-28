@@ -11,6 +11,7 @@ public class Virtual_File
      */
     Virtual_File()
     {
+        drives = new Vector<Directory>();
         drives.add(new Directory("Drive A"));
         
         drives.add(new Directory("Drive B"));

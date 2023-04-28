@@ -88,12 +88,15 @@ public class Virtual_File_GUI extends JFrame
         JFrame window = new JFrame("Virtual File System GUI");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(1300,700);
+        //SplitPane Creation
+        JLabel leftPane = new JLabel();
+        JLabel rightPane = new JLabel();
+        
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(leftPane), new JScrollPane(rightPane));
 
         //Panel Creation
-        final JDialog addDialog = new JDialog();
-
-        JPanel NewFile = new JPanel(new BorderLayout());
-        NewFile.setPreferredSize(new Dimension(175, 100));
+        JPanel NewFile = new JPanel();
         JLabel Newf = new JLabel("File Name: ");
         JTextField FileField = new JTextField(30);
         JButton addFile = new JButton("Add File");
@@ -119,25 +122,7 @@ public class Virtual_File_GUI extends JFrame
         NewFile.add(Newf);
         NewFile.add(FileField);
         NewFile.add(Creator);
-        JLabel title = new JLabel(" Add File ");
-        addDialog.setTitle("Add File Process");
 
-        addDialog.add(NewFile);
-
-        addDialog.setResizable(false);
-
-        addDialog.pack();
-
-        addDialog.setLocationRelativeTo(null);
-
-        addDialog.setModal(true);
-
-        addDialog.setAlwaysOnTop(true);
-
-        addDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-
-        addDialog.setVisible(true);
-        
         JPanel panelDeleteFile = new JPanel();
         JTextField DFField = new JTextField(30);
         JLabel DFLable = new JLabel("File to delete: ");
@@ -166,11 +151,11 @@ public class Virtual_File_GUI extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
             }
         });
-
+        panelDeleteFile.add(printFile);
         //Window Formating
+        window.add(splitPane);
         window.add(BorderLayout.NORTH, NewFile);
         window.add(BorderLayout.SOUTH, panelDeleteFile);
         window.setVisible(true);
