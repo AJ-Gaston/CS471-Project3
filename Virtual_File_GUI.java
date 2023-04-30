@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class Virtual_File_GUI extends JFrame
 {
@@ -147,7 +146,6 @@ public class Virtual_File_GUI extends JFrame
         //SplitPane Creation
         JLabel leftPane = new JLabel();
         JLabel rightPane = new JLabel();
-        
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(leftPane), new JScrollPane(rightPane));
 
         //Panel Creation
@@ -170,7 +168,14 @@ public class Virtual_File_GUI extends JFrame
                 {
                     if(NewDirectory.length() > 0 && hasText(NewDirectory))
                     {
-                        
+                        try{
+                            FileWriter outFile = new FileWriter(NewFileName);
+                            String fileText = "";
+                            outFile.write(fileText);
+                            outFile.close();
+                        } catch(IOException Thing){
+                            Thing.printStackTrace();
+                        }
                     }
 
                 }
