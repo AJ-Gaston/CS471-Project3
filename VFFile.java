@@ -1,13 +1,13 @@
-public class File {
+public class VFFile {
     private String filename;
     private String fileContent;
     
-    File()
+    VFFile()
     {
         filename = "";
     }
 
-    File(String fName, String contents)
+    VFFile(String fName, String contents)
     {
         filename = fName;
         fileContent = contents;

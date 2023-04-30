@@ -2,7 +2,7 @@ import java.util.Vector;
 public class Directory 
 {
     String directoryName;
-    Vector <File> files;
+    Vector <VFFile> files;
     Vector <Directory> directories;
     
     /**
@@ -12,7 +12,7 @@ public class Directory
     {
         directoryName = "";
         directories = new Vector<Directory>();
-        files = new Vector<File>();
+        files = new Vector<VFFile>();
     }
     
     /**
@@ -23,7 +23,7 @@ public class Directory
     {
         directoryName = name;
         directories = new Vector<Directory>();
-        files = new Vector<File>();
+        files = new Vector<VFFile>();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Directory
      * @param name
      * @return the file the matches the name
      */
-    File getFileNameInDirectory(String name)
+    VFFile getFileNameInDirectory(String name)
     {
         //Look at the files in the tope drive/directory
         for(int i = 0; i < files.size(); i++)
@@ -98,7 +98,7 @@ public class Directory
         //Look in the lower level directory (so the directory under A,B,C)
         for(int i = 0; i < directories.size(); i++)
         {
-            File temp = directories.elementAt(i).getFileNameInDirectory(name);
+            VFFile temp = directories.elementAt(i).getFileNameInDirectory(name);
             if(temp.getFileName().equals(name)){
                 return temp;
             }
@@ -115,7 +115,7 @@ public class Directory
         directories.add(dir);
     }
 
-    void addFile(File f)
+    void addFile(VFFile f)
     {
         files.add(f);
     }

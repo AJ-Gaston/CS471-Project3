@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
+import java.io.*;
+import java.util.Scanner;
 
 public class Virtual_File_GUI extends JFrame
 {
@@ -11,6 +13,60 @@ public class Virtual_File_GUI extends JFrame
     public Virtual_File_GUI()
     {
         vf = new Virtual_File();
+    }
+
+    private void printFile()
+    {
+        final JDialog addDialog = new JDialog();
+
+        JPanel miniPanel = new JPanel(new BorderLayout());
+
+        miniPanel.setPreferredSize(new Dimension(175, 100));
+
+        final JTextField text = new JTextField(10);
+
+        JButton printButton = new JButton("Print");
+
+        printButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+
+                String printFile = text.getText();
+                if(printFile.length() > 0 && hasText(printFile))
+                {
+                    vf.printFile(printFile);
+                }    
+                addDialog.dispose();
+            }
+
+        });
+
+        JLabel title = new JLabel(" Additional Priority ");
+
+        miniPanel.add(title, BorderLayout.NORTH);
+
+        miniPanel.add(printButton, BorderLayout.WEST);
+
+        miniPanel.add(text, BorderLayout.EAST);
+        
+        addDialog.setTitle("Add New Process");
+
+        addDialog.add(miniPanel);
+
+        addDialog.setResizable(false);
+
+        addDialog.pack();
+
+        addDialog.setLocationRelativeTo(null);
+
+        addDialog.setModal(true);
+
+        addDialog.setAlwaysOnTop(true);
+
+        addDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+
+        addDialog.setVisible(true);
     }
 
     public boolean hasText(String word)
@@ -92,11 +148,12 @@ public class Virtual_File_GUI extends JFrame
         JLabel leftPane = new JLabel();
         JLabel rightPane = new JLabel();
         
-
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(leftPane), new JScrollPane(rightPane));
 
         //Panel Creation
         JPanel NewFile = new JPanel();
+        JLabel dir = new JLabel("Directory: ");
+        JTextField DirectoryField = new JTextField(30);
         JLabel Newf = new JLabel("File Name: ");
         JTextField FileField = new JTextField(30);
         JButton addFile = new JButton("Add File");
@@ -106,7 +163,17 @@ public class Virtual_File_GUI extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 String NewFileName = FileField.getText();
+                String NewDirectory = DirectoryField.getText();
                 FileField.setText("");
+                DirectoryField.setText("");
+                if(NewFileName.length() > 0 && hasText(NewFileName))
+                {
+                    if(NewDirectory.length() > 0 && hasText(NewDirectory))
+                    {
+                        
+                    }
+
+                }
             }
         });
         
@@ -117,23 +184,25 @@ public class Virtual_File_GUI extends JFrame
                 Creator();
             }
         });
-
-        NewFile.add(addFile);
+        
+        NewFile.add(dir);
+        NewFile.add(DirectoryField);
         NewFile.add(Newf);
         NewFile.add(FileField);
+        NewFile.add(addFile);
         NewFile.add(Creator);
-
+        
         JPanel panelDeleteFile = new JPanel();
-        JTextField DFField = new JTextField(30);
-        JLabel DFLable = new JLabel("File to delete: ");
+        JTextField DeleteFileField = new JTextField(30);
+        JLabel DeleteFileLable = new JLabel("File to delete: ");
         JButton deleteFile = new JButton("Delete File");
         deleteFile.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String df = DFField.getText();
-                DFField.setText("");
+                String df = DeleteFileField.getText();
+                DeleteFileField.setText("");
                 if(!vf.deleteFile(df))
                 {
                     ErrorMssg("Unable to find and delete file!");
@@ -141,8 +210,8 @@ public class Virtual_File_GUI extends JFrame
 
             }
         });
-        panelDeleteFile.add(DFField);
-        panelDeleteFile.add(DFLable);
+        panelDeleteFile.add(DeleteFileField);
+        panelDeleteFile.add(DeleteFileLable);
         panelDeleteFile.add(deleteFile);
         
         JButton printFile = new JButton("Print File");
@@ -151,9 +220,11 @@ public class Virtual_File_GUI extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                printFile();
             }
         });
         panelDeleteFile.add(printFile);
+        
         //Window Formating
         window.add(splitPane);
         window.add(BorderLayout.NORTH, NewFile);

@@ -31,7 +31,7 @@ public class Virtual_File
         Directory temporary = findDirectory(dirName);
         if(temporary != null)
         {
-            temporary.addFile(new File(fName, textString));
+            temporary.addFile(new VFFile(fName, textString));
         }
 
     }
@@ -54,7 +54,7 @@ public class Virtual_File
     {
         for(int i = 0; i < drives.size(); i++)
         {
-            File temp = drives.elementAt(i).getFileNameInDirectory(fName);
+            VFFile temp = drives.elementAt(i).getFileNameInDirectory(fName);
             //This is for the null string
             if(temp != null)
             {
