@@ -18,7 +18,6 @@ public class Virtual_File
         drives.add(new Directory("Drive C"));
        
         drives.get(0).addDirectory(new Directory("Directory 1A"));
-        drives.get(0).addDirectory(new Directory("Directory 2A"));
 
         drives.get(1).addDirectory(new Directory("Directory 3B"));
 

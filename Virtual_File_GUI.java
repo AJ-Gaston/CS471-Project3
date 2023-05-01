@@ -4,6 +4,8 @@ import java.awt.event.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.*;
 import java.io.*;
+import java.util.Scanner;
+import java.util.Vector;
 
 public class Virtual_File_GUI extends JFrame
 {
@@ -139,15 +141,34 @@ public class Virtual_File_GUI extends JFrame
 
     public void VFGUI()
     {
+        Vector<JLabel> virtualFileList = new Vector<JLabel>();
+        Vector<JLabel> systemList = new Vector<JLabel>();
+        for(int i= 0;i < vf.drives.size(); i++){
+            virtualFileList.add(new JLabel(vf.drives.elementAt(i).getChildren() + ":"));
+        }
+        for(int i = 0; i < vf.drives.size(); i++)
+        {
+            systemList.add(new JLabel (vf.drives.elementAt(i).getName() + ":"));
+            systemList.add(new JLabel("Directory " + vf.drives.elementAt(i).getChildren() + ":"));
+        }
         //Window Creation
         JFrame window = new JFrame("Virtual File System GUI");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(1300,700);
-        //SplitPane Creation
-        JLabel leftPane = new JLabel();
-        JLabel rightPane = new JLabel();
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(leftPane), new JScrollPane(rightPane));
 
+        //SplitPane Creation
+        JPanel leftPane = new JPanel();
+        for(JLabel label: virtualFileList)
+        {
+            leftPane.add(label);
+        }
+        JPanel rightPane = new JPanel();
+        for(JLabel plabel: systemList)
+        {
+            rightPane.add(plabel);
+        }
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(leftPane), new JScrollPane(rightPane));
         //Panel Creation
         JPanel NewFile = new JPanel();
         JLabel dir = new JLabel("Directory: ");
@@ -160,6 +181,7 @@ public class Virtual_File_GUI extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                String fileText = "";
                 String NewFileName = FileField.getText();
                 String NewDirectory = DirectoryField.getText();
                 FileField.setText("");
@@ -169,15 +191,21 @@ public class Virtual_File_GUI extends JFrame
                     if(NewDirectory.length() > 0 && hasText(NewDirectory))
                     {
                         try{
-                            FileWriter outFile = new FileWriter(NewFileName);
-                            String fileText = "";
+                            FileWriter outFile = new FileWriter(NewFileName, true);
+                            
+                            Scanner sc = new Scanner(System.in);
+                            while(sc.hasNextLine())
+                            {
+                                fileText = sc.nextLine();
+                            }
+                            sc.close();
                             outFile.write(fileText);
                             outFile.close();
                         } catch(IOException Thing){
                             Thing.printStackTrace();
                         }
                     }
-
+                    vf.addFile(NewDirectory, NewFileName, fileText);
                 }
             }
         });
